@@ -27,7 +27,7 @@
   --whatsapp-green: #25d366;
   --whatsapp-green-dark: #1da851;
 
-  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-serif: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   --radius-sm: 10px;
@@ -132,20 +132,20 @@ a:hover {
 }
 
 /* ==========================================================================
-   1. HERO / PRIMEIRA DOBRA (Mobile First)
+   SEÇÃO 1 — ABERTURA (Mobile First)
    ========================================================================== */
 .hero {
   position: relative;
-  padding: 14px 0 28px;
+  padding: 12px 0 18px;
   overflow: hidden;
-  border-bottom: 1px solid rgba(244, 195, 109, 0.14);
+  border-bottom: 1px solid rgba(244, 195, 109, 0.12);
 }
 
 .hero-ambient {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 50% 28%, rgba(244, 195, 109, 0.18) 0%, rgba(232, 125, 46, 0.1) 38%, transparent 72%);
+    radial-gradient(ellipse at 50% 24%, rgba(244, 195, 109, 0.18) 0%, rgba(232, 125, 46, 0.1) 38%, transparent 72%);
   pointer-events: none;
   z-index: 0;
 }
@@ -214,54 +214,59 @@ a:hover {
 }
 
 .hero-eyebrow {
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gold-primary);
 }
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.75rem, 6.2vw, 2.75rem);
+  font-size: clamp(1.55rem, 5.2vw, 2.25rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
   color: var(--ivory-warm);
   text-wrap: balance;
 }
 
-.hero-theme-label {
-  display: block;
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 2px;
-}
-
-.hero-title-accent {
+.hero-title-accent,
+.text-accent {
   color: var(--gold-primary);
   font-style: italic;
 }
 
-.hero-welcome {
-  font-family: var(--font-serif);
-  font-size: clamp(1.15rem, 4.2vw, 1.45rem);
-  font-style: italic;
-  color: var(--gold-soft);
-  max-width: 34ch;
-  line-height: 1.35;
+.hero-text {
+  font-size: 1rem;
+  color: var(--text-main);
+  max-width: 52ch;
+  line-height: 1.5;
 }
 
-/* Grade de Informações (Datas, Local, Público) */
+.hero-text strong,
+.section-subtitle strong,
+.closing-text strong {
+  color: var(--ivory-warm);
+  font-weight: 600;
+}
+
+.hero-welcome {
+  font-family: var(--font-serif);
+  font-size: clamp(1.06rem, 3.8vw, 1.25rem);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold-soft);
+  max-width: 40ch;
+  line-height: 1.4;
+}
+
+/* Grade de Informações (Datas, Local, Para quem) */
 .hero-info-grid {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
   gap: 8px;
-  margin-top: 4px;
+  margin-top: 6px;
   padding: 12px 14px;
   border-radius: var(--radius-md);
   background: var(--bg-card);
@@ -300,7 +305,7 @@ a:hover {
   text-align: right;
 }
 
-/* Indicação visual discreta para descer até os depoimentos */
+/* Indicação visual discreta para descer até o vídeo */
 .hero-scroll-cue {
   display: inline-flex;
   align-items: center;
@@ -344,49 +349,59 @@ a:hover {
    SEÇÕES GERAIS
    ========================================================================== */
 .section {
-  padding: 36px 0;
+  padding: 16px 0;
 }
 
 .section-header {
   text-align: center;
   max-width: 600px;
-  margin: 0 auto 24px;
-}
-
-.section-kicker {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--gold-primary);
-  margin-bottom: 6px;
+  margin: 0 auto 14px;
 }
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.65rem, 5.5vw, 2.3rem);
+  font-size: clamp(1.4rem, 4.6vw, 1.95rem);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.22;
   color: var(--ivory-warm);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  text-wrap: balance;
 }
 
 .section-subtitle {
   font-size: 0.96rem;
-  color: var(--text-secondary);
+  color: var(--text-main);
+  line-height: 1.48;
+}
+
+.section-play-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+}
+
+.play-cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-primary);
 }
 
 /* ==========================================================================
-   2. SEÇÃO DE APRESENTAÇÃO
+   SEÇÃO 2 — EXPERIÊNCIA
    ========================================================================== */
 .intro-section {
-  padding-top: 28px;
-  padding-bottom: 20px;
+  padding-top: 16px;
+  padding-bottom: 10px;
 }
 
 .intro-card {
-  padding: 24px 20px;
+  padding: 20px 18px;
   border-radius: var(--radius-lg);
   background: linear-gradient(165deg, rgba(14, 34, 64, 0.85) 0%, rgba(8, 20, 39, 0.92) 100%);
   border: 1px solid var(--border-subtle);
@@ -394,70 +409,44 @@ a:hover {
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
+}
+
+.intro-title {
+  margin-bottom: 2px;
 }
 
 .intro-lead {
-  font-size: 1.06rem;
-  color: var(--text-main);
-  line-height: 1.6;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
 
 .intro-lead strong,
-.intro-text strong {
+.intro-bridge strong {
   color: var(--gold-soft);
   font-weight: 600;
 }
 
-.intro-text {
-  font-size: 1rem;
-  color: var(--text-secondary);
-}
-
-.intro-theme-highlight {
-  margin: 4px 0;
-  padding: 16px 14px;
-  border-radius: var(--radius-md);
-  background: rgba(244, 195, 109, 0.07);
-  border-top: 1px solid rgba(244, 195, 109, 0.25);
-  border-bottom: 1px solid rgba(244, 195, 109, 0.25);
-}
-
-.intro-theme-prefix {
-  display: block;
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-
-.intro-theme-quote {
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 5vw, 2rem);
-  font-weight: 700;
-  font-style: italic;
-  color: var(--gold-primary);
-  line-height: 1.25;
-}
-
 .intro-bridge {
-  font-size: 1rem;
+  font-size: 0.98rem;
   font-weight: 500;
   color: var(--ivory-warm);
-  line-height: 1.55;
+  line-height: 1.48;
 }
 
 /* ==========================================================================
-   3. DEPOIMENTOS EM VÍDEO
+   SEÇÃO 3 — VÍDEO DA EQUIPE
    ========================================================================== */
 .testimonials-section {
-  padding-top: 24px;
-  padding-bottom: 32px;
+  padding-top: 12px;
+  padding-bottom: 16px;
 }
 
 .testimonials-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 18px;
   max-width: 680px;
   margin: 0 auto;
 }
@@ -467,10 +456,10 @@ a:hover {
   background: var(--bg-card-strong);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-soft);
-  padding: 18px 16px 20px;
+  padding: 14px 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -483,7 +472,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
+  gap: 4px;
 }
 
 .testimonial-badge {
@@ -493,7 +482,7 @@ a:hover {
   background: rgba(232, 125, 46, 0.18);
   border: 1px solid rgba(244, 195, 109, 0.3);
   color: var(--gold-soft);
-  font-size: 0.73rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -507,14 +496,14 @@ a:hover {
 
 .testimonial-name {
   font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--ivory-warm);
   line-height: 1.25;
 }
 
 .testimonial-role {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
 }
 
@@ -528,7 +517,7 @@ a:hover {
 
 .testimonial-video {
   width: 100%;
-  max-height: 76vh;
+  max-height: 74vh;
   margin: 0 auto;
   display: block;
   background-color: #030811;
@@ -536,23 +525,23 @@ a:hover {
 }
 
 .testimonial-caption {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.45;
   padding: 0 4px;
 }
 
 /* ==========================================================================
-   5 & 6. FECHAMENTO E COMPARTILHAMENTO
+   SEÇÃO 4 — ENCERRAMENTO E COMPARTILHAMENTO
    ========================================================================== */
 .closing-section {
-  padding-top: 16px;
-  padding-bottom: 48px;
+  padding-top: 10px;
+  padding-bottom: 32px;
 }
 
 .closing-card {
   position: relative;
-  padding: 28px 20px;
+  padding: 22px 18px;
   border-radius: var(--radius-lg);
   background:
     radial-gradient(circle at 50% 0%, rgba(232, 125, 46, 0.2) 0%, transparent 65%),
@@ -563,85 +552,35 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-}
-
-.closing-verse-tag {
-  font-family: var(--font-serif);
-  font-size: 0.98rem;
-  font-style: italic;
-  color: var(--gold-soft);
-  padding: 4px 14px;
-  border-radius: 999px;
-  background: rgba(244, 195, 109, 0.1);
-  border: 1px solid var(--border-subtle);
+  gap: 10px;
 }
 
 .closing-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.65rem, 5.5vw, 2.25rem);
+  font-size: clamp(1.4rem, 4.6vw, 1.95rem);
   font-weight: 700;
   line-height: 1.25;
   color: var(--ivory-warm);
+  text-wrap: balance;
 }
 
-.closing-title span {
-  display: block;
-  color: var(--gold-primary);
-  font-style: italic;
-  margin-top: 4px;
+.closing-text {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
 }
 
-.closing-summary {
-  width: 100%;
-  padding: 18px 16px;
-  border-radius: var(--radius-md);
-  background: rgba(5, 13, 26, 0.65);
-  border: 1px solid var(--border-subtle);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.summary-event-name {
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--gold-primary);
-}
-
-.summary-theme {
+.closing-highlight {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--ivory-warm);
+  font-size: clamp(1.06rem, 3.8vw, 1.22rem);
+  font-style: italic;
+  color: var(--gold-soft);
+  line-height: 1.35;
 }
 
-.summary-details-list {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  margin-top: 6px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  text-align: left;
-}
-
-.summary-details-list li {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 6px;
-  font-size: 0.9rem;
-}
-
-.summary-detail-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
+.closing-highlight strong {
+  color: var(--gold-primary);
+  font-weight: 700;
 }
 
 /* Botões de Ação */
@@ -649,14 +588,14 @@ a:hover {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 4px;
+  gap: 10px;
+  margin-top: 6px;
 }
 
 .btn {
   width: 100%;
-  min-height: 52px;
-  padding: 14px 20px;
+  min-height: 50px;
+  padding: 13px 20px;
   border-radius: var(--radius-md);
   font-family: var(--font-sans);
   font-size: 1rem;
@@ -726,7 +665,7 @@ a:hover {
    RODAPÉ
    ========================================================================== */
 .site-footer {
-  padding: 28px 0 36px;
+  padding: 20px 0 28px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(4, 10, 20, 0.85);
   text-align: center;
@@ -735,7 +674,7 @@ a:hover {
 .footer-container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
 }
 
@@ -751,7 +690,7 @@ a:hover {
 }
 
 .footer-links {
-  margin-top: 4px;
+  margin-top: 2px;
   font-size: 0.82rem;
 }
 
@@ -816,7 +755,7 @@ a:hover {
   }
 
   .hero {
-    padding: 24px 0 40px;
+    padding: 22px 0 32px;
   }
 
   .hero-info-grid {
@@ -845,12 +784,23 @@ a:hover {
     text-align: center;
   }
 
+  .intro-section {
+    padding-top: 24px;
+    padding-bottom: 16px;
+  }
+
   .intro-card {
-    padding: 32px 36px;
+    padding: 28px 32px;
+    gap: 12px;
+  }
+
+  .testimonials-section {
+    padding-top: 18px;
+    padding-bottom: 24px;
   }
 
   .testimonial-card {
-    padding: 24px 24px 26px;
+    padding: 20px 22px 22px;
   }
 
   .testimonial-header {
@@ -863,8 +813,14 @@ a:hover {
     order: 2;
   }
 
+  .closing-section {
+    padding-top: 16px;
+    padding-bottom: 44px;
+  }
+
   .closing-card {
-    padding: 38px 36px;
+    padding: 32px 34px;
+    gap: 14px;
   }
 
   .closing-actions {
@@ -875,6 +831,7 @@ a:hover {
 
   .closing-actions .btn {
     flex: 1 1 240px;
+    max-width: 340px;
   }
 
   .closing-actions .share-feedback,
