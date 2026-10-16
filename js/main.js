@@ -23,15 +23,20 @@
   }
 
   /**
-   * Garante que apenas um vídeo toque por vez.
+   * Garante que apenas um vídeo (ou a música tema) toque por vez.
    */
-  function pauseOtherVideos(currentVideo) {
+  function pauseOtherVideos(currentMedia) {
     const allVideos = document.querySelectorAll(".testimonial-video");
     allVideos.forEach((v) => {
-      if (v !== currentVideo && !v.paused) {
+      if (v !== currentMedia && !v.paused) {
         v.pause();
       }
     });
+
+    const themeAudio = document.getElementById("theme-audio");
+    if (themeAudio && themeAudio !== currentMedia && !themeAudio.paused) {
+      themeAudio.pause();
+    }
   }
 
   /**
@@ -382,6 +387,52 @@
   }
 
   /**
+   * Configura o player da música tema do retiro.
+   */
+  function setupThemeMusic() {
+    const audio = document.getElementById("theme-audio");
+    const toggleBtn = document.getElementById("btn-music-toggle");
+    const labelEl = document.getElementById("music-btn-label");
+    const musicCard = document.getElementById("music-card");
+    if (!audio || !toggleBtn) return;
+
+    const playIcon = toggleBtn.querySelector(".music-icon-play");
+    const pauseIcon = toggleBtn.querySelector(".music-icon-pause");
+
+    function updateUiState(isPlaying) {
+      if (playIcon) playIcon.hidden = isPlaying;
+      if (pauseIcon) pauseIcon.hidden = !isPlaying;
+      if (labelEl) {
+        labelEl.textContent = isPlaying ? "Pausar música tema" : "Ouvir música tema";
+      }
+      if (musicCard) {
+        musicCard.classList.toggle("is-playing", isPlaying);
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      } else {
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener("play", () => {
+      pauseOtherVideos(audio);
+      updateUiState(true);
+    });
+
+    audio.addEventListener("pause", () => {
+      updateUiState(false);
+    });
+
+    audio.addEventListener("ended", () => {
+      updateUiState(false);
+    });
+  }
+
+  /**
    * Inicialização geral ao carregar o DOM
    */
   function init() {
@@ -390,6 +441,7 @@
     }
 
     renderTestimonials();
+    setupThemeMusic();
     setupShareButton();
   }
 

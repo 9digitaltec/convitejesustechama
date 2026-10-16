@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
   <a class="skip-link" href="#depoimentos">Ir direto para os depoimentos</a>
@@ -173,6 +173,53 @@
     </section>
 
     <!-- ==================================================================
+         SEÇÃO 3.5 — MÚSICA TEMA
+         ================================================================== -->
+    <section id="musica-tema" class="section music-section" aria-labelledby="titulo-musica">
+      <div class="container narrow-container">
+        <div class="music-card" id="music-card">
+          <span class="music-badge">Música Tema do Retiro</span>
+
+          <h2 id="titulo-musica" class="section-title music-title">
+            Entre no clima com nossa <em class="text-accent">música tema</em>
+          </h2>
+
+          <p class="music-track-info">
+            Rosa de Saron • <strong>Pra Descobrir</strong>
+          </p>
+
+          <div class="music-player-box">
+            <button
+              type="button"
+              id="btn-music-toggle"
+              class="music-play-btn"
+              aria-label="Tocar música tema"
+            >
+              <svg class="music-icon music-icon-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <polygon points="8,5 19,12 8,19" fill="currentColor"/>
+              </svg>
+              <svg class="music-icon music-icon-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false" hidden>
+                <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/>
+                <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/>
+              </svg>
+              <span id="music-btn-label">Ouvir música tema</span>
+            </button>
+
+            <audio
+              id="theme-audio"
+              class="music-audio"
+              controls
+              preload="metadata"
+              src="musica/Pra Descobri Rosa De Saron.m4a"
+            >
+              Seu navegador não suporta reprodução de áudio.
+            </audio>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
          SEÇÃO 4 — ENCERRAMENTO
          ================================================================== -->
     <section id="convite-final" class="section closing-section" aria-labelledby="titulo-fechamento">
@@ -225,8 +272,8 @@
   </footer>
 
   <!-- Scripts do Projeto -->
-  <script src="js/config.js"></script>
-  <script src="js/tracking.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/config.js?v=3"></script>
+  <script src="js/tracking.js?v=3"></script>
+  <script src="js/main.js?v=3"></script>
 </body>
 </html>

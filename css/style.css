@@ -532,6 +532,109 @@ a:hover {
 }
 
 /* ==========================================================================
+   SEÇÃO 3.5 — MÚSICA TEMA DO RETIRO
+   ========================================================================== */
+.music-section {
+  padding-top: 8px;
+  padding-bottom: 12px;
+}
+
+.music-card {
+  position: relative;
+  padding: 22px 18px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(165deg, rgba(14, 34, 64, 0.88) 0%, rgba(8, 20, 39, 0.94) 100%);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.music-card.is-playing {
+  border-color: var(--gold-primary);
+  box-shadow: var(--shadow-soft), 0 0 26px rgba(244, 195, 109, 0.22);
+}
+
+.music-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(232, 125, 46, 0.18);
+  border: 1px solid rgba(244, 195, 109, 0.32);
+  color: var(--gold-soft);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.music-title {
+  margin-bottom: 0;
+}
+
+.music-track-info {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+.music-track-info strong {
+  color: var(--gold-soft);
+  font-weight: 600;
+}
+
+.music-player-box {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.music-play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold-primary) 0%, #e5a948 100%);
+  color: #061224;
+  font-family: var(--font-sans);
+  font-size: 0.96rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(244, 195, 109, 0.25);
+  transition: transform 0.18s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.music-play-btn:hover,
+.music-play-btn:focus-visible {
+  background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold-primary) 100%);
+  color: #061224;
+  transform: translateY(-1px);
+}
+
+.music-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.music-audio {
+  width: 100%;
+  height: 40px;
+  border-radius: 999px;
+  outline: none;
+}
+
+/* ==========================================================================
    SEÇÃO 4 — ENCERRAMENTO E COMPARTILHAMENTO
    ========================================================================== */
 .closing-section {
