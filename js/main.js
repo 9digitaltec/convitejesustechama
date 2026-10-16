@@ -268,7 +268,7 @@
       if (typeof window.bindVideoTracking === "function") {
         window.bindVideoTracking(video, {
           id: item.id || "depoimento_" + numberLabel,
-          displayName: displayName
+          displayName: item.adminLabel || displayName
         });
       }
     });

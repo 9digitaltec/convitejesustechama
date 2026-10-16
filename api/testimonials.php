@@ -44,27 +44,33 @@ if (is_dir($depoimentosDir)) {
 
             // Verifica se o nome do arquivo é genérico (ex: "WhatsApp Video...", "video1", "depoimento_01", "VID-...")
             $isGenericName = (bool) preg_match(
-                '/^(whatsapp\s*video|vid[-_]|video[-_\s]*\d*|depoimento[-_\s]*\d+|img[-_]|mov[-_]|\d+)$/i',
+                '/^(whatsapp\s*video|vid[-_]|video[-_\s]*\d*|depoimento[-_\s]*\d+|img[-_]|mov[-_]|\d+)/i',
                 trim($baseName)
             );
 
-            // Se o cliente nomear como "01 - Lucas.mp4" ou "Maria.mp4", extrai o nome limpo opcionalmente
+            // Se o cliente nomear como "01 - Lucas.mp4" ou "Maria.mp4", extrai o nome limpo para exibir na landing
             $cleanName = '';
             if (!$isGenericName) {
                 $cleaned = preg_replace('/^\d+\s*[-_.]+\s*/', '', trim($baseName));
                 $cleanName = is_string($cleaned) ? trim($cleaned) : '';
             }
 
+            // Nome amigável para o painel administrativo (mostra o nome do arquivo para identificar qual vídeo é qual)
+            $adminLabel = $cleanName !== ''
+                ? 'Depoimento ' . $numStr . ' — ' . $cleanName
+                : 'Depoimento ' . $numStr . ' (' . $baseName . ')';
+
             $items[] = [
-                'id'      => 'depoimento_' . $numStr,
-                'name'    => $cleanName,
-                'role'    => '',
-                'file'    => 'depoimentos/' . $filename,
-                'poster'  => '',
-                'caption' => $index === 0
+                'id'         => 'depoimento_' . $numStr,
+                'name'       => $cleanName,
+                'adminLabel' => $adminLabel,
+                'role'       => '',
+                'file'       => 'depoimentos/' . $filename,
+                'poster'     => '',
+                'caption'    => $index === 0
                     ? 'Um convite preparado de coração por quem está organizando cada detalhe para receber você.'
                     : '',
-                'tracks'  => [],
+                'tracks'     => [],
             ];
         }
     }

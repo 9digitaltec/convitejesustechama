@@ -143,12 +143,28 @@ try {
             $diskVideos = array_values($diskVideos);
 
             foreach ($diskVideos as $idx => $filename) {
-                $numStr = str_pad((string) ($idx + 1), 2, '0', STR_PAD_LEFT);
-                $vidId  = 'depoimento_' . $numStr;
+                $numStr   = str_pad((string) ($idx + 1), 2, '0', STR_PAD_LEFT);
+                $vidId    = 'depoimento_' . $numStr;
+                $baseName = pathinfo($filename, PATHINFO_FILENAME);
+
+                $isGeneric = (bool) preg_match(
+                    '/^(whatsapp\s*video|vid[-_]|video[-_\s]*\d*|depoimento[-_\s]*\d+|img[-_]|mov[-_]|\d+)/i',
+                    trim($baseName)
+                );
+                $cleanPerson = '';
+                if (!$isGeneric) {
+                    $cleaned = preg_replace('/^\d+\s*[-_.]+\s*/', '', trim($baseName));
+                    $cleanPerson = is_string($cleaned) ? trim($cleaned) : '';
+                }
+
+                $friendlyTitle = $cleanPerson !== ''
+                    ? 'Depoimento ' . $numStr . ' — ' . $cleanPerson
+                    : 'Depoimento ' . $numStr . ' (' . $baseName . ')';
+
                 if (!isset($dbVideosById[$vidId])) {
                     $dbVideosById[$vidId] = [
-                        'video_id'        => $vidId,
-                        'video_name'      => 'Depoimento ' . $numStr,
+                        'video_id'        => $vidId . ' • ' . $filename,
+                        'video_name'      => $friendlyTitle,
                         'started'         => 0,
                         'p25'             => 0,
                         'p50'             => 0,
@@ -158,6 +174,10 @@ try {
                         'completion_rate' => 0.0,
                         'relevant_rate'   => 0.0,
                     ];
+                } else {
+                    // Atualiza o título e subtítulo do card com o nome do arquivo atual na pasta
+                    $dbVideosById[$vidId]['video_name'] = $friendlyTitle;
+                    $dbVideosById[$vidId]['video_id']   = $vidId . ' • ' . $filename;
                 }
             }
         }
