@@ -327,9 +327,22 @@
   }
 
   /**
-   * Configura o botão de compartilhamento ("Compartilhar este convite").
+   * Configura o rastreamento do botão de inscrição ("Quero participar • Preencher ficha")
+   * e mantém suporte caso #btn-share exista.
    */
   function setupShareButton() {
+    const participateBtn = document.getElementById("btn-participate");
+    if (participateBtn) {
+      if (window.APP_CONFIG && window.APP_CONFIG.formUrl) {
+        participateBtn.href = window.APP_CONFIG.formUrl;
+      }
+      participateBtn.addEventListener("click", () => {
+        if (typeof window.trackEvent === "function") {
+          window.trackEvent("share_click");
+        }
+      });
+    }
+
     const shareBtn = document.getElementById("btn-share");
     if (!shareBtn) return;
 

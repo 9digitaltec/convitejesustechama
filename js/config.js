@@ -17,6 +17,7 @@ const APP_CONFIG = {
   eventDates: "30 e 31 de outubro e 1º de novembro",
   eventLocation: "Pinhais",
   eventAudience: "Jovens a partir de 17 anos e adultos.",
+  formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSehyiXCgNbepo4s-Dr_lfMMFKakipOildw8CYx1_i5hJM6rZA/viewform?usp=header",
   shareTitle: "24º Jesus te Chama | É necessário nascer de novo",
   shareText:
     "Um convite especial para você: 24º Jesus te Chama — 30 e 31 de outubro e 1º de novembro em Pinhais. Assista ao recado da nossa equipe:"
