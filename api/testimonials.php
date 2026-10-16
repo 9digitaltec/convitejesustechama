@@ -42,16 +42,16 @@ if (is_dir($depoimentosDir)) {
             $numStr = str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT);
             $baseName = pathinfo($filename, PATHINFO_FILENAME);
 
-            // Verifica se o nome do arquivo é genérico (ex: "WhatsApp Video...", "video1", "depoimento_01", "VID-...")
+            // Verifica se o nome do arquivo é apenas genérico sem nome de pessoa (ex: "WhatsApp Video...", "video1", "depoimento_01", "VID-...")
             $isGenericName = (bool) preg_match(
-                '/^(whatsapp\s*video|vid[-_]|video[-_\s]*\d*|depoimento[-_\s]*\d+|img[-_]|mov[-_]|\d+)/i',
+                '/^(whatsapp\s*video.*|vid[-_].*|video[-_\s]*\d*|depoimento[-_\s]*\d+|img[-_].*|mov[-_].*|\d+)$/i',
                 trim($baseName)
             );
 
-            // Se o cliente nomear como "01 - Lucas.mp4" ou "Maria.mp4", extrai o nome limpo para exibir na landing
+            // Se o cliente nomear como "01 - Lucas.mp4", "Depoimento Willian.mov" ou "Maria.mp4", extrai o nome limpo para exibir
             $cleanName = '';
             if (!$isGenericName) {
-                $cleaned = preg_replace('/^\d+\s*[-_.]+\s*/', '', trim($baseName));
+                $cleaned = preg_replace('/^(\d+\s*[-_.]*\s*)?(depoimento\s*[-_.]*\s*)?/i', '', trim($baseName));
                 $cleanName = is_string($cleaned) ? trim($cleaned) : '';
             }
 

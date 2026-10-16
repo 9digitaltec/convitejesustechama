@@ -148,12 +148,12 @@ try {
                 $baseName = pathinfo($filename, PATHINFO_FILENAME);
 
                 $isGeneric = (bool) preg_match(
-                    '/^(whatsapp\s*video|vid[-_]|video[-_\s]*\d*|depoimento[-_\s]*\d+|img[-_]|mov[-_]|\d+)/i',
+                    '/^(whatsapp\s*video.*|vid[-_].*|video[-_\s]*\d*|depoimento[-_\s]*\d+|img[-_].*|mov[-_].*|\d+)$/i',
                     trim($baseName)
                 );
                 $cleanPerson = '';
                 if (!$isGeneric) {
-                    $cleaned = preg_replace('/^\d+\s*[-_.]+\s*/', '', trim($baseName));
+                    $cleaned = preg_replace('/^(\d+\s*[-_.]*\s*)?(depoimento\s*[-_.]*\s*)?/i', '', trim($baseName));
                     $cleanPerson = is_string($cleaned) ? trim($cleaned) : '';
                 }
 

@@ -41,7 +41,7 @@ const testimonials = [
     id: "depoimento_01",
     name: "",
     role: "",
-    file: "depoimentos/WhatsApp Video 2026-10-13 at 09.26.29.mp4",
+    file: "depoimentos/Depoimento Willian.mov",
     poster: "",
     caption: "Um convite preparado de coração por quem está organizando cada detalhe para receber você.",
     tracks: []

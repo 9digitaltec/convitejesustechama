@@ -203,15 +203,12 @@
         video.setAttribute("poster", item.poster.trim());
       }
 
-      const source = document.createElement("source");
       // Se não houver poster personalizado, #t=0.1 ajuda navegadores mobile a exibirem o primeiro frame
       const videoSrc =
         !item.poster && item.file && item.file.indexOf("#") === -1
           ? item.file + "#t=0.1"
           : item.file;
-      source.src = videoSrc;
-      source.type = "video/mp4";
-      video.appendChild(source);
+      video.src = videoSrc;
 
       // Suporte preparado para legendas WebVTT (.vtt)
       if (Array.isArray(item.tracks)) {
