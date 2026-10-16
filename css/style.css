@@ -620,17 +620,31 @@ a:hover {
   flex-shrink: 0;
 }
 
-.btn-primary {
+.btn-primary,
+a.btn-primary,
+a.btn-primary:visited {
   background: linear-gradient(135deg, var(--gold-primary) 0%, #e5a948 100%);
-  color: #061224;
+  color: #061224 !important;
   box-shadow: 0 6px 20px rgba(244, 195, 109, 0.28);
 }
 
 .btn-primary:hover,
-.btn-primary:focus-visible {
+.btn-primary:focus,
+.btn-primary:focus-visible,
+.btn-primary:active,
+a.btn-primary:hover,
+a.btn-primary:focus,
+a.btn-primary:active {
   background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold-primary) 100%);
-  color: #061224;
+  color: #061224 !important;
   transform: translateY(-1px);
+}
+
+.btn-primary span,
+.btn-primary svg,
+.btn-primary:hover span,
+.btn-primary:hover svg {
+  color: #061224 !important;
 }
 
 .btn-secondary {
