@@ -391,44 +391,26 @@
    */
   function setupThemeMusic() {
     const audio = document.getElementById("theme-audio");
-    const toggleBtn = document.getElementById("btn-music-toggle");
-    const labelEl = document.getElementById("music-btn-label");
     const musicCard = document.getElementById("music-card");
-    if (!audio || !toggleBtn) return;
-
-    const playIcon = toggleBtn.querySelector(".music-icon-play");
-    const pauseIcon = toggleBtn.querySelector(".music-icon-pause");
-
-    function updateUiState(isPlaying) {
-      if (playIcon) playIcon.hidden = isPlaying;
-      if (pauseIcon) pauseIcon.hidden = !isPlaying;
-      if (labelEl) {
-        labelEl.textContent = isPlaying ? "Pausar música tema" : "Ouvir música tema";
-      }
-      if (musicCard) {
-        musicCard.classList.toggle("is-playing", isPlaying);
-      }
-    }
-
-    toggleBtn.addEventListener("click", () => {
-      if (audio.paused) {
-        audio.play().catch(() => {});
-      } else {
-        audio.pause();
-      }
-    });
+    if (!audio) return;
 
     audio.addEventListener("play", () => {
       pauseOtherVideos(audio);
-      updateUiState(true);
+      if (musicCard) {
+        musicCard.classList.add("is-playing");
+      }
     });
 
     audio.addEventListener("pause", () => {
-      updateUiState(false);
+      if (musicCard) {
+        musicCard.classList.remove("is-playing");
+      }
     });
 
     audio.addEventListener("ended", () => {
-      updateUiState(false);
+      if (musicCard) {
+        musicCard.classList.remove("is-playing");
+      }
     });
   }
 
