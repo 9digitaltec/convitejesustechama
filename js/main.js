@@ -67,13 +67,63 @@
   }
 
   /**
+   * Busca automaticamente os vídeos presentes na pasta /depoimentos/ via API PHP
+   * e mescla com configurações opcionais definidas em `window.testimonials` (js/config.js).
+   */
+  async function resolveTestimonialsList() {
+    const manualList = Array.isArray(window.testimonials) ? window.testimonials : [];
+    const manualByFile = new Map();
+    manualList.forEach((item) => {
+      if (item && item.file) {
+        manualByFile.set(item.file.trim(), item);
+      }
+    });
+
+    try {
+      const response = await fetch("api/testimonials.php", {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        cache: "no-store"
+      });
+      if (response.ok) {
+        const data = await response.json();
+        if (data && Array.isArray(data.testimonials) && data.testimonials.length > 0) {
+          return data.testimonials.map((autoItem, idx) => {
+            const numStr = String(idx + 1).padStart(2, "0");
+            const manual = manualByFile.get(autoItem.file);
+            if (manual) {
+              return {
+                id: manual.id || autoItem.id || "depoimento_" + numStr,
+                name: manual.name || autoItem.name || "",
+                role: manual.role || autoItem.role || "",
+                file: autoItem.file,
+                poster: manual.poster || autoItem.poster || "",
+                caption:
+                  manual.caption !== undefined && manual.caption !== ""
+                    ? manual.caption
+                    : autoItem.caption || "",
+                tracks: Array.isArray(manual.tracks) ? manual.tracks : []
+              };
+            }
+            return autoItem;
+          });
+        }
+      }
+    } catch (err) {
+      // Se estiver rodando sem PHP (ex: abrindo o arquivo direto), usa a lista de js/config.js
+    }
+
+    return manualList;
+  }
+
+  /**
    * Renderiza os cards de depoimentos dentro de #testimonials-list
    */
-  function renderTestimonials() {
+  async function renderTestimonials() {
     const container = document.getElementById("testimonials-list");
     if (!container) return;
 
-    const list = Array.isArray(window.testimonials) ? window.testimonials : [];
+    const list = await resolveTestimonialsList();
     container.innerHTML = "";
 
     if (list.length === 0) {

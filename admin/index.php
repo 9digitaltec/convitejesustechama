@@ -97,6 +97,7 @@ try {
         ORDER BY video_id ASC
     ";
     $videoRows = $pdo->query($videoSql)->fetchAll();
+    $dbVideosById = [];
 
     foreach ($videoRows as $row) {
         $started   = (int) $row['started'];
@@ -105,10 +106,11 @@ try {
 
         $completionRate = $started > 0 ? ($completed / $started) * 100.0 : 0.0;
         $relevantRate   = $started > 0 ? ($p50 / $started) * 100.0 : 0.0;
+        $vidId          = (string) $row['video_id'];
 
-        $videos[] = [
-            'video_id'        => (string) $row['video_id'],
-            'video_name'      => !empty($row['video_name']) ? (string) $row['video_name'] : (string) $row['video_id'],
+        $dbVideosById[$vidId] = [
+            'video_id'        => $vidId,
+            'video_name'      => !empty($row['video_name']) ? (string) $row['video_name'] : $vidId,
             'started'         => $started,
             'p25'             => (int) $row['p25'],
             'p50'             => $p50,
@@ -120,7 +122,51 @@ try {
         ];
     }
 
-    // Se ainda não houver eventos de vídeo gravados no banco, exibe card zerado para Depoimento 01
+    // Descobre automaticamente os vídeos existentes na pasta /depoimentos/
+    $depoimentosDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'depoimentos';
+    if (is_dir($depoimentosDir)) {
+        $scanFiles = scandir($depoimentosDir);
+        if (is_array($scanFiles)) {
+            $diskVideos = [];
+            foreach ($scanFiles as $f) {
+                if ($f === '.' || $f === '..') {
+                    continue;
+                }
+                if (is_file($depoimentosDir . DIRECTORY_SEPARATOR . $f)) {
+                    $ext = strtolower(pathinfo($f, PATHINFO_EXTENSION));
+                    if (in_array($ext, ['mp4', 'webm', 'mov', 'm4v'], true)) {
+                        $diskVideos[] = $f;
+                    }
+                }
+            }
+            natcasesort($diskVideos);
+            $diskVideos = array_values($diskVideos);
+
+            foreach ($diskVideos as $idx => $filename) {
+                $numStr = str_pad((string) ($idx + 1), 2, '0', STR_PAD_LEFT);
+                $vidId  = 'depoimento_' . $numStr;
+                if (!isset($dbVideosById[$vidId])) {
+                    $dbVideosById[$vidId] = [
+                        'video_id'        => $vidId,
+                        'video_name'      => 'Depoimento ' . $numStr,
+                        'started'         => 0,
+                        'p25'             => 0,
+                        'p50'             => 0,
+                        'p75'             => 0,
+                        'p90'             => 0,
+                        'completed'       => 0,
+                        'completion_rate' => 0.0,
+                        'relevant_rate'   => 0.0,
+                    ];
+                }
+            }
+        }
+    }
+
+    ksort($dbVideosById);
+    $videos = array_values($dbVideosById);
+
+    // Se ainda não houver vídeos na pasta nem eventos no banco, exibe card zerado para Depoimento 01
     if (empty($videos)) {
         $videos[] = [
             'video_id'        => 'depoimento_01',
